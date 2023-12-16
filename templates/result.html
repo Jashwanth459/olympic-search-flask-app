@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Search Olympic Data</title>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles/index.css') }}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+        <script>
+            window.history.forward(1);
+        </script>
+    </head>
+    <body>
+        <h2 align="center">Search Results</h1>
+        {% if display_filter == 'Table' %}
+            <table border = 1>
+                <tr>
+                    {% if filtered_data.size != 0 %}
+                        {% for column_name in groupby_data.keys() %}
+                            <th style="align-items: center;">{{column_name}}</th>
+                        {% endfor %}
+                    {% endif %}
+                </tr>
+                {% for row in filtered_data %}
+                    <tr>
+                        {% for record in row %}
+                            <td>
+                                {{record}}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        {% if display_filter != 'Table' %}
+            <!-- <svg width="600" height="500"></svg> -->
+            <img src="{{fig_url}}" style="display: block; margin-right: auto; margin-left: auto;"/>
+        {% endif %}
+        {% if filtered_data.size == 0 %}
+            <h4 style="text-align-last: center;">
+                Oops!! Not results for this search. Please widen your search.
+                <br />
+                Click <a href="http://127.0.0.1:5000/" >here</a> to go back to Search Olympic Data :)
+            </h4>
+         {% endif %}
+        </div>
+    </body>
+</html>
