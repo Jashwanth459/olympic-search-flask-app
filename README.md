@@ -1,5 +1,7 @@
-# Depencies
+# Technologies/Depencies
 
+- html
+- css
 - python
 - pandas
 - numpy
